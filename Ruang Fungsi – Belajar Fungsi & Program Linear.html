@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ruang Fungsi – Belajar Fungsi &amp; Program Linear</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef3f8;--card:#fff;--ink:#12263f;--mut:#51657d;--line:#cfdae6;--a:#1b5fd1;--b:#e0572b;--ok:#17805a;--soft:#e3edfb}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1824;--card:#16222f;--ink:#e6eef8;--mut:#9db0c6;--line:#2a3b4f;--a:#6aa2ff;--b:#ff8a5c;--ok:#4cc79a;--soft:#1d3050}}
+:root[data-theme="dark"]{--bg:#0f1824;--card:#16222f;--ink:#e6eef8;--mut:#9db0c6;--line:#2a3b4f;--a:#6aa2ff;--b:#ff8a5c;--ok:#4cc79a;--soft:#1d3050}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Georgia,"Times New Roman",serif;
+background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:32px 32px;background-attachment:fixed}
+header{background:var(--card);border-bottom:2px solid var(--ink);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.wrap{max-width:980px;margin:auto;padding:0 16px}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 0}
+.logo{font:700 22px/1 Georgia,serif;letter-spacing:-.5px}.logo i{color:var(--b)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{font:600 14px system-ui,sans-serif;border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--ink);color:var(--card)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+main{padding:24px 0 48px}
+section{display:none}section.on{display:block}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.1;margin:8px 0 6px;letter-spacing:-1px}
+h2{font-size:24px;margin:28px 0 8px}h3{font-size:18px;margin:16px 0 4px}
+.lead{color:var(--mut);max-width:62ch;margin:0 0 18px}
+.card{background:var(--card);border:1.5px solid var(--ink);border-radius:4px;padding:18px;margin:14px 0;box-shadow:5px 5px 0 var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.f{font:italic 17px Georgia,serif;background:var(--soft);padding:6px 10px;border-left:4px solid var(--a);margin:8px 0;overflow-x:auto;white-space:nowrap}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:10px 0}
+label{font:600 13px system-ui,sans-serif;color:var(--mut);display:flex;flex-direction:column;gap:3px}
+input,select{font:16px system-ui,sans-serif;width:84px;padding:7px;border:1.5px solid var(--ink);border-radius:4px;background:var(--card);color:var(--ink)}
+select{width:62px}
+.btn{font:600 14px system-ui,sans-serif;background:var(--a);color:#fff;border:0;border-radius:4px;padding:9px 14px;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.out{font:15px/1.7 system-ui,sans-serif;background:var(--soft);padding:10px 12px;border-radius:4px;min-height:48px}
+.out b{color:var(--b)}
+.cv{width:100%;height:auto;border:1.5px solid var(--ink);border-radius:4px;background:var(--card);display:block}
+.tbl{overflow-x:auto}table{border-collapse:collapse;font:15px system-ui,sans-serif;width:100%}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.av{width:96px;height:96px;border-radius:50%;background:var(--a);color:#fff;display:grid;place-items:center;font:700 38px system-ui}
+footer{text-align:center;color:var(--mut);font:13px system-ui;padding:20px}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+<div class="logo">f(<i>x</i>) Ruang Fungsi</div>
+<nav role="tablist">
+<button role="tab" data-t="lq" aria-selected="true">Linear &amp; Kuadrat</button>
+<button role="tab" data-t="ci" aria-selected="false">Komposisi &amp; Invers</button>
+<button role="tab" data-t="pl" aria-selected="false">Program Linear</button>
+<button role="tab" data-t="pf" aria-selected="false">Profil</button>
+</nav></div></header>
+
+<main class="wrap">
+
+<!-- ===== LINEAR & KUADRAT ===== -->
+<section id="lq" class="on">
+<h1>Fungsi Linear dan Fungsi Kuadrat</h1>
+<p class="lead">Dua fungsi paling dasar: yang satu grafiknya garis lurus, yang lain berbentuk parabola.</p>
+<div class="grid">
+<div class="card"><h3>Fungsi linear</h3>
+<p>Bentuk umum dengan <b>m</b> sebagai gradien (kemiringan) dan <b>c</b> sebagai titik potong sumbu-y. Grafiknya selalu garis lurus.</p>
+<div class="f">f(x) = mx + c</div>
+<div class="f">Gradien dua titik: m = (y₂ − y₁) / (x₂ − x₁)</div>
+<div class="f">Titik potong sumbu-x: x = −c / m</div>
+<p>Jika m &gt; 0 garis naik, jika m &lt; 0 garis turun.</p></div>
+<div class="card"><h3>Fungsi kuadrat</h3>
+<p>Grafiknya parabola. Jika a &gt; 0 terbuka ke atas, jika a &lt; 0 terbuka ke bawah.</p>
+<div class="f">f(x) = ax² + bx + c</div>
+<div class="f">Diskriminan: D = b² − 4ac</div>
+<div class="f">Akar: x = (−b ± √D) / 2a</div>
+<div class="f">Puncak: (−b/2a , −D/4a)</div>
+<p>D &gt; 0 dua akar berbeda, D = 0 satu akar, D &lt; 0 tidak ada akar real.</p></div>
+</div>
+
+<h2>Kalkulator fungsi linear</h2>
+<div class="card">
+<div class="row">
+<label>m (gradien)<input id="lm" type="number" value="2" step="any"></label>
+<label>c (konstanta)<input id="lc" type="number" value="-3" step="any"></label>
+<label>nilai x<input id="lx" type="number" value="4" step="any"></label>
+<button class="btn" onclick="calcLin()">Hitung &amp; gambar</button></div>
+<div class="chips"><button class="btn alt" onclick="setLin(1,0)">y = x</button><button class="btn alt" onclick="setLin(-2,4)">y = −2x + 4</button><button class="btn alt" onclick="setLin(0.5,1)">y = ½x + 1</button></div>
+<div class="out" id="lo"></div><br>
+<canvas class="cv" id="lcv" width="640" height="380" role="img" aria-label="Grafik fungsi linear"></canvas></div>
+
+<h2>Kalkulator fungsi kuadrat</h2>
+<div class="card">
+<div class="row">
+<label>a<input id="qa" type="number" value="1" step="any"></label>
+<label>b<input id="qb" type="number" value="-2" step="any"></label>
+<label>c<input id="qc" type="number" value="-3" step="any"></label>
+<label>nilai x<input id="qx" type="number" value="2" step="any"></label>
+<button class="btn" onclick="calcQuad()">Hitung &amp; gambar</button></div>
+<div class="chips"><button class="btn alt" onclick="setQ(1,-2,-3)">D &gt; 0: x²−2x−3</button><button class="btn alt" onclick="setQ(1,-4,4)">D = 0: x²−4x+4</button><button class="btn alt" onclick="setQ(-1,0,4)">a &lt; 0: −x²+4</button><button class="btn alt" onclick="setQ(1,0,1)">D &lt; 0: x²+1</button></div>
+<div class="out" id="qo"></div><br>
+<canvas class="cv" id="qcv" width="640" height="380" role="img" aria-label="Grafik fungsi kuadrat"></canvas></div>
+</section>
+
+<!-- ===== KOMPOSISI & INVERS ===== -->
+<section id="ci">
+<h1>Komposisi dan Invers Fungsi</h1>
+<p class="lead">Komposisi menggabungkan dua fungsi menjadi satu. Invers membalik kerja sebuah fungsi.</p>
+<div class="grid">
+<div class="card"><h3>Komposisi</h3>
+<p>Hasil fungsi dalam dimasukkan ke fungsi luar.</p>
+<div class="f">(f ∘ g)(x) = f(g(x))</div>
+<div class="f">(g ∘ f)(x) = g(f(x))</div>
+<div class="f">(f ∘ f)(x) = f(f(x))</div>
+<div class="f">(g ∘ g)(x) = g(g(x))</div>
+<p>Pada umumnya f ∘ g ≠ g ∘ f.</p></div>
+<div class="card"><h3>Invers</h3>
+<p>f⁻¹ ada jika f berkorespondensi satu-satu. Caranya: tulis y = f(x), ubah menjadi x = …, lalu tukar x dan y.</p>
+<div class="f">f(x) = ax + b ⇒ f⁻¹(x) = (x − b) / a</div>
+<div class="f">f(f⁻¹(x)) = f⁻¹(f(x)) = x</div>
+<div class="f">(f ∘ g)⁻¹ = g⁻¹ ∘ f⁻¹</div></div>
+</div>
+<h2>Kalkulator komposisi dan invers</h2>
+<div class="card">
+<p>Masukkan f(x) = ax + b dan g(x) = cx + d.</p>
+<div class="row">
+<label>a<input id="ca" type="number" value="2" step="any"></label>
+<label>b<input id="cb" type="number" value="3" step="any"></label>
+<label>c<input id="cc" type="number" value="4" step="any"></label>
+<label>d<input id="cd" type="number" value="-1" step="any"></label>
+<label>nilai x<input id="cx" type="number" value="2" step="any"></label>
+<button class="btn" onclick="calcComp()">Hitung</button></div>
+<div class="tbl"><table id="ct"></table></div></div>
+</section>
+
+<!-- ===== PROGRAM LINEAR ===== -->
+<section id="pl">
+<h1>Program Linear</h1>
+<p class="lead">Mencari nilai maksimum atau minimum sebuah fungsi tujuan di bawah batasan berupa pertidaksamaan linear.</p>
+<div class="grid">
+<div class="card"><h3>Komponen</h3>
+<p><b>Fungsi tujuan</b> z = px + qy yang akan dimaksimumkan atau diminimumkan. <b>Kendala</b> berupa pertidaksamaan linear ax + by ≤ c atau ≥ c, ditambah x ≥ 0 dan y ≥ 0.</p>
+<div class="f">z = px + qy</div></div>
+<div class="card"><h3>Langkah metode titik pojok</h3>
+<ol><li>Ubah soal cerita menjadi model matematika.</li><li>Gambar garis kendala dan arsir daerah penyelesaian.</li><li>Tentukan titik-titik pojok daerah itu.</li><li>Hitung z di setiap titik pojok.</li><li>Ambil nilai terbesar (maks) atau terkecil (min).</li></ol></div>
+</div>
+<h2>Contoh soal dan penyelesaian</h2>
+<div class="card">
+<div class="chips">
+<button class="btn alt" onclick="ex(0)">Soal 1: sepatu</button>
+<button class="btn alt" onclick="ex(1)">Soal 2: kue</button>
+<button class="btn alt" onclick="ex(2)">Soal 3: minimum</button></div>
+<p id="soal"></p>
+<div class="row">
+<label>Tujuan<select id="mode" style="width:90px"><option value="max">Maks</option><option value="min">Min</option></select></label>
+<label>p (x)<input id="pp" type="number" step="any"></label>
+<label>q (y)<input id="pq" type="number" step="any"></label></div>
+<div id="cons"></div>
+<div class="row"><button class="btn alt" onclick="addC()">+ Tambah kendala</button><button class="btn" onclick="solveLP()">Selesaikan</button></div>
+<div class="out" id="lpo"></div><br>
+<canvas class="cv" id="lpcv" width="640" height="400" role="img" aria-label="Daerah penyelesaian program linear"></canvas>
+<div class="tbl"><table id="lpt"></table></div></div>
+</section>
+
+<!-- ===== PROFIL ===== -->
+<section id="pf">
+<h1>Profil Pengembang</h1>
+<p class="lead"></p>
+<div class="card" style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+<div class="av">N</div>
+<div><h3 style="margin:0">Febryan Imanuel Puay</h3>
+<p style="margin:4px 0">Siswa dari SMK Bagimu Negeriku / RPL</p>
+<p style="margin:4px 0;color:var(--mut)">Email: febryanpuay@email.com · Instagram: @puayanakbaik</p></div></div>
+<div class="card"><h3>Tentang proyek</h3>
+<p>Website ini dibuat sebagai media belajar interaktif untuk materi fungsi linear, fungsi kuadrat, komposisi dan invers, serta program linear, menggunakan HTML, CSS, dan JavaScript.</p>
+<p><b>Tujuan:</b> membantu pengguna memahami materi lewat rumus, grafik, dan kalkulator.</p></div>
+</section>
+</main>
+<footer>Prototype pembelajaran matematika · HTML, CSS, JS</footer>
+
+<script>
+const $=id=>document.getElementById(id), v=id=>parseFloat($(id).value);
+const n=x=>{x=Math.round(x*1000)/1000;return String(x).replace('-','−')};
+const css=k=>getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+// tabs
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));
+ document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===b.dataset.t));
+ window.scrollTo(0,0);});
+// generic graph
+function graph(cv,fns,xr,yr,pts,shade){
+ const c=cv.getContext('2d'),W=cv.width,H=cv.height,X=x=>(x-xr[0])/(xr[1]-xr[0])*W,Y=y=>H-(y-yr[0])/(yr[1]-yr[0])*H;
+ c.clearRect(0,0,W,H);
+ if(shade){c.fillStyle='rgba(27,95,209,.22)';for(let i=0;i<W;i+=4)for(let j=0;j<H;j+=4){const x=xr[0]+(i+2)/W*(xr[1]-xr[0]),y=yr[0]+(H-j-2)/H*(yr[1]-yr[0]);if(shade(x,y))c.fillRect(i,j,4,4)}}
+ c.strokeStyle=css('--line');c.lineWidth=1;c.font='11px system-ui';c.fillStyle=css('--mut');
+ const step=Math.max(1,Math.ceil((xr[1]-xr[0])/12));
+ for(let x=Math.ceil(xr[0]/step)*step;x<=xr[1];x+=step){c.beginPath();c.moveTo(X(x),0);c.lineTo(X(x),H);c.stroke();if(x)c.fillText(x,X(x)+2,Y(0)+12)}
+ for(let y=Math.ceil(yr[0]/step)*step;y<=yr[1];y+=step){c.beginPath();c.moveTo(0,Y(y));c.lineTo(W,Y(y));c.stroke();if(y)c.fillText(y,X(0)+3,Y(y)-2)}
+ c.strokeStyle=css('--ink');c.lineWidth=2;c.beginPath();c.moveTo(X(0),0);c.lineTo(X(0),H);c.moveTo(0,Y(0));c.lineTo(W,Y(0));c.stroke();
+ fns.forEach(o=>{c.strokeStyle=o.col;c.lineWidth=2.5;c.beginPath();let on=0;
+  for(let i=0;i<=W;i++){const x=xr[0]+i/W*(xr[1]-xr[0]),y=o.f(x);if(!isFinite(y)){on=0;continue}on?c.lineTo(i,Y(y)):c.moveTo(i,Y(y));on=1}c.stroke()});
+ (pts||[]).forEach(p=>{c.fillStyle=p.col||css('--b');c.beginPath();c.arc(X(p.x),Y(p.y),5,0,7);c.fill();c.fillStyle=css('--ink');c.font='12px system-ui';c.fillText(p.l||'',X(p.x)+8,Y(p.y)-8)});
+}
+// linear
+function setLin(m,c){$('lm').value=m;$('lc').value=c;calcLin()}
+function calcLin(){const m=v('lm'),c=v('lc'),x=v('lx'),y=m*x+c;
+ $('lo').innerHTML=`f(x) = <b>${n(m)}x ${c<0?'−':'+'} ${n(Math.abs(c))}</b><br>f(${n(x)}) = <b>${n(y)}</b><br>Titik potong sumbu-y: (0, ${n(c)}) · Titik potong sumbu-x: ${m?`(${n(-c/m)}, 0)`:'tidak ada'}<br>Garis ${m>0?'naik':m<0?'turun':'mendatar'}.`;
+ const pts=[{x:0,y:c,l:'(0,'+n(c)+')'},{x,y,l:'f('+n(x)+')'}];if(m)pts.push({x:-c/m,y:0,l:'akar',col:css('--ok')});
+ graph($('lcv'),[{f:t=>m*t+c,col:css('--a')}],[-10,10],[-7,7],pts)}
+// quadratic
+function setQ(a,b,c){$('qa').value=a;$('qb').value=b;$('qc').value=c;calcQuad()}
+function calcQuad(){const a=v('qa'),b=v('qb'),c=v('qc'),x=v('qx');
+ if(!a){$('qo').textContent='Nilai a tidak boleh 0 pada fungsi kuadrat.';return}
+ const D=b*b-4*a*c,xp=-b/(2*a),yp=-D/(4*a),pts=[{x:xp,y:yp,l:'puncak',col:css('--b')},{x:0,y:c,l:'',col:css('--a')}];let r;
+ if(D>0){const x1=(-b+Math.sqrt(D))/(2*a),x2=(-b-Math.sqrt(D))/(2*a);r=`Dua akar: x₁ = <b>${n(x1)}</b>, x₂ = <b>${n(x2)}</b>`;pts.push({x:x1,y:0,col:css('--ok'),l:'x₁'},{x:x2,y:0,col:css('--ok'),l:'x₂'})}
+ else if(D==0){r=`Satu akar: x = <b>${n(xp)}</b>`;pts.push({x:xp,y:0,col:css('--ok')})}else r='Tidak ada akar real (parabola tidak memotong sumbu-x)';
+ $('qo').innerHTML=`f(x) = ${n(a)}x² + ${n(b)}x + ${n(c)}<br>D = b² − 4ac = <b>${n(D)}</b> → ${r}<br>Puncak: (<b>${n(xp)}</b>, <b>${n(yp)}</b>) · Sumbu simetri x = ${n(xp)} · Terbuka ke ${a>0?'atas (minimum)':'bawah (maksimum)'}<br>f(${n(x)}) = <b>${n(a*x*x+b*x+c)}</b>`;
+ graph($('qcv'),[{f:t=>a*t*t+b*t+c,col:css('--a')}],[-8,8],[-8,8],pts)}
+// komposisi & invers
+function calcComp(){const a=v('ca'),b=v('cb'),c=v('cc'),d=v('cd'),x=v('cx');
+ const L=(m,k)=>`${n(m)}x ${k<0?'−':'+'} ${n(Math.abs(k))}`,f=t=>a*t+b,g=t=>c*t+d,rows=[['f(x)',L(a,b),n(f(x))],['g(x)',L(c,d),n(g(x))],
+ ['(f∘g)(x) = f(g(x))',L(a*c,a*d+b),n(f(g(x)))],['(g∘f)(x) = g(f(x))',L(a*c,b*c+d),n(g(f(x)))],
+ ['(f∘f)(x)',L(a*a,a*b+b),n(f(f(x)))],['(g∘g)(x)',L(c*c,c*d+d),n(g(g(x)))]];
+ if(a&&c){const fi=t=>(t-b)/a,gi=t=>(t-d)/c;rows.push(['f⁻¹(x)',`(x ${b<0?'+':'−'} ${n(Math.abs(b))}) / ${n(a)}`,n(fi(x))],['g⁻¹(x)',`(x ${d<0?'+':'−'} ${n(Math.abs(d))}) / ${n(c)}`,n(gi(x))],
+ ['(f∘g)⁻¹(x) = g⁻¹(f⁻¹(x))','dihitung berurutan',n(gi(fi(x)))])}
+ else rows.push(['Invers','tidak ada bila a = 0 atau c = 0','–']);
+ $('ct').innerHTML='<tr><th>Fungsi</th><th>Rumus</th><th>Nilai di x = '+n(x)+'</th></tr>'+rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td><b>${r[2]}</b></td></tr>`).join('')}
+// program linear
+const EX=[
+{t:'Seorang pedagang menjual sepatu (x pasang) dan sandal (y pasang). Ia hanya mampu menampung 40 pasang, dan total modal membatasi x + 2y ≤ 60. Laba sepatu Rp20.000 dan sandal Rp30.000 per pasang (dalam ribuan). Berapa laba maksimum?',m:'max',p:20,q:30,c:[[1,1,'≤',40],[1,2,'≤',60]]},
+{t:'Kue A memerlukan 2 kg tepung dan kue B 1 kg tepung. Tersedia 20 kg tepung (2x + y ≤ 20) dan 12 kg gula (x + 2y ≤ 16). Keuntungan kue A Rp3.000 dan B Rp2.000 (dalam ribuan). Tentukan keuntungan maksimum.',m:'max',p:3,q:2,c:[[2,1,'≤',20],[1,2,'≤',16]]},
+{t:'Seorang atlet harus memenuhi kebutuhan: 2x + y ≥ 8 dan x + 2y ≥ 10. Biaya makanan x adalah 4 dan makanan y adalah 6 (dalam ribuan). Tentukan biaya minimum.',m:'min',p:4,q:6,c:[[2,1,'≥',8],[1,2,'≥',10]]}];
+function cRow(a,b,o,c){const d=document.createElement('div');d.className='row';
+ d.innerHTML=`<label>a<input type="number" value="${a}" step="any"></label><label>b<input type="number" value="${b}" step="any"></label><label>tanda<select><option${o=='≤'?' selected':''}>≤</option><option${o=='≥'?' selected':''}>≥</option></select></label><label>c<input type="number" value="${c}" step="any"></label><button class="btn alt" onclick="this.parentNode.remove()">Hapus</button>`;
+ $('cons').appendChild(d)}
+function addC(){cRow(1,1,'≤',10)}
+function ex(i){const e=EX[i];$('soal').textContent=e.t;$('mode').value=e.m;$('pp').value=e.p;$('pq').value=e.q;$('cons').innerHTML='';e.c.forEach(k=>cRow(...k));solveLP()}
+function solveLP(){
+ const p=v('pp'),q=v('pq'),mn=$('mode').value=='min',C=[...$('cons').children].map(r=>{const i=r.querySelectorAll('input,select');return{a:+i[0].value,b:+i[1].value,o:i[2].value,c:+i[3].value}});
+ const ok=(x,y)=>x>=-1e-9&&y>=-1e-9&&C.every(k=>k.o=='≤'?k.a*x+k.b*y<=k.c+1e-9:k.a*x+k.b*y>=k.c-1e-9);
+ const L=[{a:1,b:0,c:0},{a:0,b:1,c:0},...C],V=[];
+ for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const u=L[i],w=L[j],det=u.a*w.b-w.a*u.b;if(Math.abs(det)<1e-12)continue;
+  const x=(u.c*w.b-w.c*u.b)/det,y=(u.a*w.c-w.a*u.c)/det;if(ok(x,y)&&!V.some(t=>Math.abs(t.x-x)<1e-6&&Math.abs(t.y-y)<1e-6))V.push({x,y,z:p*x+q*y})}
+ if(!V.length){$('lpo').textContent='Tidak ada daerah penyelesaian yang memenuhi semua kendala.';$('lpt').innerHTML='';return}
+ const best=V.reduce((s,t)=>(mn?t.z<s.z:t.z>s.z)?t:s);
+ $('lpt').innerHTML='<tr><th>Titik pojok</th><th>z = '+n(p)+'x + '+n(q)+'y</th></tr>'+V.map(t=>`<tr><td>(${n(t.x)}, ${n(t.y)})</td><td>${n(t.z)}${t===best?' ← '+(mn?'minimum':'maksimum'):''}</td></tr>`).join('');
+ $('lpo').innerHTML=`Nilai ${mn?'minimum':'maksimum'} z = <b>${n(best.z)}</b> di titik (<b>${n(best.x)}</b>, <b>${n(best.y)}</b>).`+(V.length&&C.some(k=>k.o=='≥')?'<br>Daerah bisa tak terbatas, nilai minimum hanya valid bila z memang dicari minimum.':'');
+ const R=Math.max(10,...V.map(t=>Math.max(t.x,t.y)))*1.3,cols=['#1b5fd1','#e0572b','#17805a','#8a4fd0','#b8860b'];
+ const fns=C.map((k,i)=>({col:cols[i%5],f:k.b?t=>(k.c-k.a*t)/k.b:()=>NaN}));
+ C.forEach((k,i)=>{if(!k.b&&k.a){const xv=k.c/k.a;fns.push({col:cols[i%5],f:()=>NaN})}});
+ graph($('lpcv'),fns,[-R*.06,R],[-R*.06,R*.62],V.map(t=>({x:t.x,y:t.y,l:`(${n(t.x)}, ${n(t.y)})`,col:t===best?css('--ok'):css('--b')})),ok)}
+calcLin();calcQuad();calcComp();ex(0);
+</script>
+</body>
+</html>
